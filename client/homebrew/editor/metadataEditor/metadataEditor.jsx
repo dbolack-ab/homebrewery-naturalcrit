@@ -18,30 +18,6 @@ const callIfExists = (val, fn, ...args)=>{
 	}
 };
 
-<<<<<<< HEAD
-const MetadataEditor = createReactClass({
-	displayName     : 'MetadataEditor',
-	getDefaultProps : function() {
-		return {
-			metadata : {
-				editId      : null,
-				shareId     : null,
-				title       : '',
-				description : '',
-				thumbnail   : '',
-				tags        : [],
-				published   : false,
-				authors     : [],
-				renderer    : 'legacy',
-				theme       : '5ePHB',
-				lang        : 'en',
-				style       : ''
-			},
-
-			onChange    : ()=>{},
-			reportError : ()=>{}
-		};
-=======
 const MetadataEditor = ({
 	metadata = {
 		shareId     : null,
@@ -55,7 +31,6 @@ const MetadataEditor = ({
 		published   : false,
 		thumbnail   : '',
 		theme       : '5ePHB',
->>>>>>> master
 	},
 	onChange = ()=>{},
 	reportError = ()=>{},
@@ -146,32 +121,10 @@ const MetadataEditor = ({
     		...metadata,
     		authors : metadata.authors.filter((a)=>a !== author)
 		});
-<<<<<<< HEAD
-	},
-
-	handleDownloadTheme : function(){
-		const here = this;
-		request.get(`/css/${this.props.metadata.theme}`)
-			.send()
-			.end((err, res)=>{
-				if(!err) {
-					here.props.metadata.style = `${res.text}\n\n${here.props.metadata.style}`;
-					here.props.onChange(here.props.metadata, 'style');
-					here.setThemeToParent();
-				}
-			});
-
-	},
-
-	renderPublish : function(){
-		if(this.props.metadata.published){
-			return <button id='publish-button' className='unpublish' onClick={()=>this.handlePublish(false)}>
-=======
 	};
 	const renderPublish = ()=>{
 		if(metadata.published){
 			return <button id='publish-button' className='unpublish' onClick={()=>handlePublish(false)}>
->>>>>>> master
 				<i className='fas fa-ban' aria-hidden='true' /> unpublish
 			</button>;
 		} else {
@@ -356,23 +309,8 @@ const MetadataEditor = ({
 		</div>;
 	};
 
-<<<<<<< HEAD
-	setThemeToParent : function() {
-		const mergedThemes = _.merge(Themes, this.props.userThemes);
-
-		this.handleTheme({
-			renderer : this.props.metadata?.renderer,
-			path     : mergedThemes[this.props.metadata.renderer][this.props.metadata.theme]?.useTheme ?? 'Blank'
-		});
-
-	},
-
-	render : function(){
-		return <div className='metadataEditor uiEditor'>
-=======
 	return (
 		<div className='metadataEditor uiEditor'>
->>>>>>> master
 			<h1>Properties Editor</h1>
 
 			<div className='field title'>
