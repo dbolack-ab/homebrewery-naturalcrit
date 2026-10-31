@@ -92,9 +92,8 @@ HomebrewSchema.statics.getUserPinnedThemes = async function(username) {
 			]
 		},
 		pinnedByUsers : {
-			$in : [
-				username
-			] }
+			$in : username
+		}
 	};
 	const query = { authors: username, published: true, ...filter };
 	const brews = await Homebrew.find(query, fields).lean().exec()
