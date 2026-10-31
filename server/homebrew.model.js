@@ -112,17 +112,15 @@ HomebrewSchema.statics.setPin  = async function(username, shareId, pin) {
 			throw error;
 		});
 	if(brew) {
-		if(!brew.authors.includes(username)) {
-			const Pins = brew.pinned ?? [];
-			const index = Pins?.indexOf(username) ?? -1;
-			if(!pin) {
-				if(index !== -1) brew.pinned.splice(index, 1);
-			} else {
-				if(index == -1) brew.pinned.push(username);
-			}
-			if(Pins.length !== brew.pinned.length)
-				await brew.save();
+		const Pins = brew.pinned ?? [];
+		const index = Pins?.indexOf(username) ?? -1;
+		if(!pin) {
+			if(index !== -1) brew.pinned.splice(index, 1);
+		} else {
+			if(index == -1) brew.pinned.push(username);
 		}
+		if(Pins.length !== brew.pinned.length)
+			await brew.save();
 	}
 };
 
