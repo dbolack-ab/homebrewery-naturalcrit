@@ -107,7 +107,10 @@ HomebrewSchema.statics.getUserPinnedThemes = async function(username) {
 HomebrewSchema.statics.setPin  = async function(username, shareId, pin) {
 	// Test for User Ownership of brew
 	const brew = await Homebrew.findOne({ shareId: shareId }, null).exec()
-		.catch((error)=>{});
+		.catch((error)=>{
+			// Shouldn't happen, but...
+			throw error;
+		});
 	if(brew) {
 		if(!brew.authors.includes(username)) {
 			const Pins = brew.pinned ?? [];

@@ -173,7 +173,7 @@ export default async function createApp(vite) {
 		try {
 			await HomebrewModel.setPin(username, shareId, pinState);
 		} catch (err) {
-			console.log(err);
+			throw err;
 		}
 	});
 
