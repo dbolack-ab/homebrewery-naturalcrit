@@ -114,13 +114,11 @@ HomebrewSchema.statics.setPin  = async function(username, shareId, pin) {
 	if(brew) {
 		const Pins = brew.pinned ?? [];
 		const index = Pins?.indexOf(username) ?? -1;
-		if(!pin) {
-			if(index !== -1) brew.pinned.splice(index, 1);
-		} else {
-			if(index == -1) brew.pinned.push(username);
-		}
-		if(Pins.length !== brew.pinned.length)
-			await brew.save();
+		if(pin)
+			brew.pinned = _.uniq([...brew.pinned, username]);
+		else
+			brew.pinned = brew.pinned.filter((a)=>a !== username);
+		await brew.save();
 	}
 };
 
