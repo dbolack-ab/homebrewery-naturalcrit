@@ -31,8 +31,6 @@ const MetadataNav = createReactClass({
 
 	togglePinState : async function(){
 		if(global.account) {
-			// Don't toggle if Brew Author
-			if(brew.authors.indexOf(global.account.username) > -1) return;
 			const newPinnedBrewState = !this.state.isPinnedBrew;
 			this.setState((prevProps)=>({
 				isPinnedBrew : newPinnedBrewState
