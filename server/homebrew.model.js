@@ -98,7 +98,10 @@ HomebrewSchema.statics.getUserPinnedThemes = async function(username) {
 	};
 	const query = { authors: username, published: true, ...filter };
 	const brews = await Homebrew.find(query, fields).lean().exec()
-		.catch((error)=>{});
+		.catch((error)=>{
+			// this should never happen, so throw it uphill
+			throw error;
+		});
 	return brews;
 };
 
